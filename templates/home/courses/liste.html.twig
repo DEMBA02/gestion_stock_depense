@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des courses !{% endblock %}
+
+{% block body %}
+  <div style="display:flex; justify-content:space-between" class="mt-2 mb-2" >
+    <h4 class="fw-bold "><span class="text-muted fw-light">Courses</span> /liste</h4>
+      <a href={{ path("app_form", parameters = []) }} class="btn btn-warning "> <i class="bx bx-plus-circle"></i></a>
+
+  </div>
+            <div class="row mb-5">
+              <!-- Examples -->
+              {% for course in courses %}
+
+
+              
+                <div class="col-md-4">
+                  <div class="card h-100">
+                    <img class="card-img-top" src="../assets/assets/img/elements/2.jpg" alt="Card image cap" />
+                    <div class="card-body">
+                      <h5 class="card-title">{{course.libelle}}</h5>
+                      <p class="card-text">
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                      </p>
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#modalToggle"
+                        >
+                          Details
+                        </button>
+                    </div>
+                  </div>
+                </div>
+              
+
+
+      <div
+        class="modal fade"
+        id="modalToggle"
+        aria-labelledby="modalToggleLabel"
+        tabindex="-1"
+        style="display: none"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalToggleLabel">Mes Courses</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">Show a second modal and hide this one with the button below.</div>
+            <div class="modal-footer">
+              <button
+                class="btn btn-primary"
+                data-bs-target="#modalToggle2"
+                data-bs-toggle="modal"
+                data-bs-dismiss="modal"
+              >
+                Open second modal
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      </div>
+{% endblock %}

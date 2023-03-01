@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Abonnements{% endblock %}
+
+{% block body %}
+    <h1>Mes Abonnements</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Montant</th>
+                <th>Debut</th>
+                <th>ModePaiement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for abonnement in abonnements %}
+            <tr>
+                <td>{{ abonnement.id }}</td>
+                <td>{{ abonnement.type }}</td>
+                <td>{{ abonnement.montant }}</td>
+                <td>{{ abonnement.debut ? abonnement.debut|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ abonnement.modePaiement }}</td>
+                <td>
+                    <a class="btn btn-outline-info" href="{{ path('app_abonnement_show', {'id': abonnement.id}) }}">show</a>
+                    <a class="btn btn-outline-success" href="{{ path('app_abonnement_edit', {'id': abonnement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-warning" href="{{ path('app_abonnement_new') }}">Create new</a>
+
+    <div class="content-wrapper">
+            <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h1>Mes Abonnements</h1>
+
+            <div class="card">
+                <h5 class="card-header">Abonnements </h5>
+                <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Type</th>
+                        <th>Montant</th>
+                        <th>Debut</th>
+                        <th>ModePaiement</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                    {% for abonnement in abonnements %}
+                      <tr class="table-default">
+                        <td><i class="fab fa-sketch fa-lg text-warning me-3"></i> <strong>{{ abonnement.id }}</strong></td>
+                        <td>{{ abonnement.type }}</td>
+                        <td><span class="badge bg-label-primary me-1">{{ abonnement.montant }}</span></td>
+                        <td>{{ abonnement.debut ? abonnement.debut|date('Y-m-d H:i:s') : '' }}</td>
+                        <td><span class="badge bg-label-primary me-1">{{ abonnement.modePaiement }}</span></td>
+                        <td>
+                          <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                              <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="{{ path('app_abonnement_edit', {'id': abonnement.id}) }}"
+                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
+                                >
+                              <a class="dropdown-item" href="{{ path('app_abonnement_show', {'id': abonnement.id}) }}"
+                                ><i class="bx bx-detail me-1"></i> Show</a
+                              >
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">no records found</td>
+                        </tr>
+                    {% endfor %} 
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
